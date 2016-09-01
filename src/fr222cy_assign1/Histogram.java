@@ -16,7 +16,7 @@ import java.util.Scanner;
  */
 public class Histogram {
 
-
+	
 	public static void main(String[] args) throws FileNotFoundException {
 			
 		List<Integer> sortedList = getSortedNumbers(getIntListFromFile(args[0]));	

@@ -34,7 +34,7 @@ public class Play123GameMain {
 	}
 	
 	static boolean play123(int counter, Deck deck){
-		for(int y = 0; y < deck.deckSize(); y++){
+		for(int y = 0; y < 52; y++){
 			if(counter > 3){
 				counter = 1;
 			}

@@ -18,13 +18,18 @@ import java.util.Scanner;
 public class CountChars {
 
 	public static void main(String[] args) throws IOException {
-		if(args[0].toString() != null){
+		
+		try{
 			String content = getFileContent(args[0].toString());
 			countContent(content);
 		}
-		else{
-			System.out.println("Provide a path!");
+		catch(Exception e){
+			System.out.println("Something went wrong!");
+			e.printStackTrace();
 		}
+		
+		
+		
 	}
 	
 	

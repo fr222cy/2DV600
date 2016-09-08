@@ -23,26 +23,26 @@ public class Queue implements QueueInterface {
 	public boolean isEmpty() {
 		return size == 0;
 	}
-
+	//Code from lecture slides 
 	@Override
 	public void enqueue(Object obj) {
 		
 		if (head == null){
 			head = new Node(obj);
-			tail = head;// Add first element
+			tail = head;// 
 		}
 	
 		else {
-		tail.setNext(new Node(obj)); // Attach new node
-		tail = tail.getNext(); // Update tail
+		tail.setNext(new Node(obj)); 
+		tail = tail.getNext();
 		}
 		size++;
 	}
-
+	//Sets the first object as the next in the queue
 	@Override
 	public Object dequeue() throws IndexOutOfBoundsException {
 		if(head != null){
-			Node headTobeRemoved = head; // Find node before index 
+			Node headTobeRemoved = head; // 
 			
 			head = headTobeRemoved.getNext();
 			size--;
@@ -54,7 +54,7 @@ public class Queue implements QueueInterface {
 		}
 	
 	}
-
+	//Returns the first object (head) in the queue
 	@Override
 	public Object first() throws IndexOutOfBoundsException {
 		if(head != null){
@@ -64,7 +64,7 @@ public class Queue implements QueueInterface {
 			throw new IndexOutOfBoundsException();
 		}
 	}
-
+	//Returns the last object (tail) in the queue
 	@Override
 	public Object last() throws IndexOutOfBoundsException {
 		if(head != null){
@@ -74,7 +74,7 @@ public class Queue implements QueueInterface {
 			throw new IndexOutOfBoundsException();
 		}
 	}
-
+	//Check if the linked list contains the object sent in as param.
 	@Override
 	public boolean contains(Object obj) {
 		
@@ -87,24 +87,23 @@ public class Queue implements QueueInterface {
 		}
 		return false;
 	}
-
+	//Returns a new instance of the ListIterator
 	@Override
 	public Iterator iterator() {
 		// TODO Auto-generated method stub
 		return new ListIterator();
 	}
-	
+	//Some code from lecture slides
 	private class ListIterator implements Iterator<Object> {
         private Node node = head;
         
         
-        // true if the iteration has more elements
         @Override
         public boolean hasNext() {
             return node != null;
         }
         
-        // Returns the next Object in the iteration
+       
         @Override
         public Object next() {
         	

@@ -1,5 +1,8 @@
 package fr222cy_assign1.DeckAssignment;
-
+/**
+ * @author Filip Rydberg
+ *
+ */
 public class PlayCardsMain {
 
 	public static void main(String[] args) {

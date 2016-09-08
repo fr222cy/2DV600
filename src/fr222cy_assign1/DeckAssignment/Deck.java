@@ -1,5 +1,8 @@
 package fr222cy_assign1.DeckAssignment;
-
+/**
+ * @author Filip Rydberg
+ *
+ */
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

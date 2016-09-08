@@ -1,3 +1,8 @@
+package fr222cy_assign1.Queue;
+/**
+ * @author Filip Rydberg
+ *
+ */
 
 /**
  * QueueInterface.java

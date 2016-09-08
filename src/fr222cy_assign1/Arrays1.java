@@ -67,7 +67,7 @@ public class Arrays1 {
 	public boolean hasSubsequence(int[] arr, int[] sub) {
 		int index = 0;
 		int[] compareArr = new int[sub.length];
-	
+		
 		for(int i = 0; i < arr.length; i++){
 							
 				if(arr[i] == sub[index]){

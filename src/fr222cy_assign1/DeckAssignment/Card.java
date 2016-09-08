@@ -1,5 +1,8 @@
 package fr222cy_assign1.DeckAssignment;
-
+/**
+ * @author Filip Rydberg
+ *
+ */
 public class Card {
 	
 	public enum Suite  {

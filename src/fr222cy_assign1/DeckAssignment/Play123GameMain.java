@@ -1,5 +1,8 @@
 package fr222cy_assign1.DeckAssignment;
-
+/**
+ * @author Filip Rydberg
+ *
+ */
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +28,7 @@ public class Play123GameMain {
 			
 		}
 		
-		double probability = ((double)wins / (double)losses) *100;
+		double probability = ((double)wins / plays) *100;
 		DecimalFormat df = new DecimalFormat("#.##");
 		System.out.println("Wins: "+wins);
 		System.out.println("Losses: "+losses);

@@ -1,0 +1,82 @@
+1. What is the Java Virtual Machine? What is Bytecode?
+When a Java project is built, The source-code is translated into
+bytecode, which is the code that is readable for the JVM. 
+The JVM compiles the Java bytecode on runtime.  
+
+2. What is the Java Classpath?
+Is the user-defined path to the Java classes and packages, that will be provided for the JVM or the Java compiler.
+
+3. How do you compile and run your java program without the help of an Integrated Development Environment (IDE) (e.g., an IDE like Eclipse)?
+You can compile your program from the command prompt using "javac fileName.java"
+When the compile is done it creates a .class file in the compiled directory.
+You can then run the Java program typing "java fileName" from the command propmt.
+
+4. What is a JAR file?
+The JAR file is a zip-file.
+It can contain anything but the JAR files main feature is that it can be executed if it contains the necessary java files. So it can be equivalent to
+the .exe.
+ 
+5. How do you declare the starting point of a Java application?
+public static void main(String[] args) {}
+
+6. What is a package? Why is important to declare classes inside packages?
+A package is conceptually a folder but it is used as a unique namespace in a Java project. This prevents unorganized projects if you use it right. 
+ex. Place related class files and interfaces in the same package.  
+Classes within the package can access eachothers members.
+
+7. What is an interface? Why is it important to not change them?
+A reference type, implemented by a class. It's like a blueprint for how a class should be implemented. Therefore it should not be changed since every class that has implemented the interface cannot compile, due to mismatch.
+
+8. Which visibility levels are available in Java? What is the default visibility for classes, methods, and fields?
+Public, Protected, Private
+
+When none of above is declared it sets the scope package-private(default), which
+means the method, field and class can only be accessed from within the package. 
+
+9. In the context of Java, what is an Exception? And what is an Error?
+An Error is a subclass of Throwable that indicates
+serious problems that a reasonable application should not try to catch.
+
+An Exception is an event that disrupts the normal flow of the program. 
+The exception is an object which contain all the necessary information about the error.
+
+10. What happened if your program terminates with an OutOfMemoryError, or NoClassDefFoundError or NullPointerException?
+
+OutOfMemoryError:Thrown when the JVM cannot allocate an object because it is out of memory,
+ and no more memory could be made available by the garbage collector.
+NoClassDefFoundError:Thrown if the JVM or a ClassLoader instance tries to load in the definition of a class 
+and no definition of the class could be found.
+NullPointerException:Thrown when an application attempts to use null in a case where an object is required
+
+11. How do you handle Exceptions in your program?
+By surround the code with a try/catch-block. 
+
+ex.
+try{
+int test = 1000000000000000000000000000000;
+System.Out.Print(test);
+}
+catch(Exception e)
+{
+e.printStackTrace();
+}
+
+12. Why is it important to test your code/application/product, before you deliver it to your customer/boss/teacher?
+To secure that the application doesn't contain any bugs or/and doesn't have any runtime/compile errors.
+13. What is JavaDoc? How do you write documentation with it?
+Is a tool which are used for generating Java code documentation in HTML format from Java source code.
+
+* @author  Filip Rydberg
+* @version 1.0
+* @since   2016-09-12
+*/
+public class Person {
+   /**
+   * Combines firstname and lastname as a string.
+   * @param fName This is the first paramter to GetFullName method
+   * @param lName  This is the second parameter to GetFullName method
+   * @return String This returns the firstName and lastName combined as a String.
+   */
+   public String GetFullName(String fName, String lName) {
+      return fName +" "+ lName;
+   }

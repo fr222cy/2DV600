@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Vehicle {
-	private float _space;
+	private double _space;
 	private int _cost;
 	private int _costPerPassenger;
 	private List<Passenger> _passengersInVehicle; 
@@ -18,7 +18,7 @@ public abstract class Vehicle {
 		_cost = cost;
 	}
 	
-	protected void setSpace(float space){
+	protected void setSpace(double space){
 		_space = space;
 	}
 	
@@ -34,7 +34,7 @@ public abstract class Vehicle {
 		return _cost;
 	}
 	
-	protected float getSpace(){
+	protected double getSpace(){
 		return _space;
 	}
 	

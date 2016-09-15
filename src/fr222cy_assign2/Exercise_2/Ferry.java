@@ -38,11 +38,12 @@ public class Ferry implements FerryInterface{
 
 	@Override
 	public int countVehicleSpace() {
-		float sum = 0;
+		double sum = 0;
 		for(Vehicle v: _vehicles){
 			sum += v.getSpace();
 		}
-		return Math.round(sum);
+		
+		return (int)sum;
 	}
 
 	@Override

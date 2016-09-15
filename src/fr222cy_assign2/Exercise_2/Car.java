@@ -5,8 +5,8 @@ public class Car extends Vehicle{
 	
 	public Car(int numOfPassengers) throws IndexOutOfBoundsException{
 		
-		if(numOfPassengers > MAX_PASSENGERS && numOfPassengers > 0){
-			throw new IndexOutOfBoundsException("Max Passengers for Car:"+MAX_PASSENGERS);
+		if(numOfPassengers > MAX_PASSENGERS || numOfPassengers < 1){
+			throw new IndexOutOfBoundsException("Max Passengers for Car:"+MAX_PASSENGERS +"  Min is: 1");
 		}
 		
 		this.setCost(100);

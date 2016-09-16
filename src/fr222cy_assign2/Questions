@@ -53,12 +53,13 @@ By surround the code with a try/catch-block.
 
 ex.
 try{
-int test = 1000000000000000000000000000000;
-System.Out.Print(test);
+    int[] arr = new int[3]
+
+    arr[4] = 10;
 }
-catch(Exception e)
+catch(IndexOutOfBoundsException e)
 {
-e.printStackTrace();
+    e.printStackTrace();
 }
 
 12. Why is it important to test your code/application/product, before you deliver it to your customer/boss/teacher?

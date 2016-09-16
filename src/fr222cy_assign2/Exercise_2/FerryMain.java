@@ -8,7 +8,7 @@ package fr222cy_assign2.Exercise_2;
  *
  */
 public class FerryMain {
-
+	
 	
 	public static void main(String[] args) {
 		
@@ -58,7 +58,7 @@ public class FerryMain {
 		System.out.println();
 		System.out.println();
 		System.out.println("Try to add 1 full car and then fill the ferry up with bicycles.\n"
-				+ "Should be 196 Vehicles and 199 passengers");
+				+ "Should be 197 Vehicles and 200 passengers");
 		System.out.println();
 		ferry.embark(new Car(4));
 		
@@ -68,6 +68,22 @@ public class FerryMain {
 	
 		System.out.println("Printing Ferry Status.. ferry.ToString() -> ");	
 		System.out.println(ferry.toString());
+		System.out.println();
+		System.out.println();
+		System.out.println("'Disembark all vehicles and passengers'|ferry.disembark()");
+		ferry.disembark();
+		System.out.println("Add 39 full cars. Then a bicycle, then a full car.\n"
+				+"Should only add 39 cars and a bicycle");
+		
+		for(int i = 0; i< 39; i++){
+			ferry.embark(new Car(4));
+		}
+		ferry.embark(new Bicycle());
+		ferry.embark(new Car(4));
+		
+		System.out.println(ferry.toString());
 	}
+	
+	
 
 }

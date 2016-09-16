@@ -10,6 +10,8 @@ public class Ferry implements FerryInterface{
 	private final int MAX_SPACE = 40;
 	private final int MAX_ROOM = 200;
 	private int _totalMoney = 0;
+	private double _usedSpace = 0;
+	private int multiplier = (int) Math.pow(10, 2);
 	
 	public Ferry(){
 		_vehicles = new ArrayList<>();
@@ -37,13 +39,8 @@ public class Ferry implements FerryInterface{
 	}
 
 	@Override
-	public int countVehicleSpace() {
-		double sum = 0;
-		for(Vehicle v: _vehicles){
-			sum += v.getSpace();
-		}
-		
-		return (int)sum;
+	public int countVehicleSpace() {	
+		return (int)_usedSpace;
 	}
 
 	@Override
@@ -55,8 +52,11 @@ public class Ferry implements FerryInterface{
 	public void embark(Vehicle v) {
 		if(hasSpaceFor(v) && _passengers.size() + v.getNumberOfPassengers() <= MAX_ROOM){
 			_vehicles.add(v);
+			_usedSpace += v.getSpace();
+			//http://stackoverflow.com/questions/14845937/java-how-to-set-precision-for-double-value User:justAnotherGuy
+			_usedSpace= (double) ((long) (_usedSpace * multiplier)) / multiplier;
 			_totalMoney += v.getCost();
-			
+						
 			for(Passenger passenger: v.getPassengers()){
 				embark(passenger);
 			}
@@ -75,11 +75,12 @@ public class Ferry implements FerryInterface{
 	public void disembark() {
 		_vehicles.clear();
 		_passengers.clear();
+		_usedSpace = 0;
 	}
 
 	@Override
 	public boolean hasSpaceFor(Vehicle v) {
-		if(countVehicleSpace() + v.getSpace() > MAX_SPACE 
+		if(_usedSpace + v.getSpace() > MAX_SPACE 
 		   || _vehicles.contains(v)){
 			return false;
 		}
@@ -103,7 +104,7 @@ public class Ferry implements FerryInterface{
 		text+="-----------------\n";
 		text+="Vehicles Embarked: "+ _vehicles.size() +"\n";
 		text+="Passengers Embarked: "+ _passengers.size() +"/"+MAX_ROOM+"\n";
-		text+="Space Occupied:"+countVehicleSpace()+"/"+MAX_SPACE+ "\n";
+		text+="Space Occupied:"+(int)Math.ceil(_usedSpace)+"/"+MAX_SPACE+ "\n";
 		text+="Total Income: "+ _totalMoney +"\n";
 		text+="-----------------\n";
 		text+="Vehicle Details\n";

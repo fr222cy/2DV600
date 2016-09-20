@@ -3,6 +3,7 @@ package fr222cy_assign2.Exercise_1;
 public class CollectionMain {
 
 	public static void main(String[] args) {
+		//TODO: Add try catch.
 		ArrayIntList list = new ArrayIntList();	
 		ArrayIntStack stack = new ArrayIntStack();
 		
@@ -33,5 +34,7 @@ public class CollectionMain {
 		System.out.println("Stack-values:" + stack.toString());
 		stack.peek();
 		System.out.println("stack.peek() Return:" + stack.peek());
+		
+		
 	}
 }

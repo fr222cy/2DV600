@@ -43,7 +43,7 @@ public class CollectionTest {
 		//Check if the list has the specified size.
 		ArrayIntList emptyList = buildIntList(0);
 		ArrayIntList list2 = buildIntList(10000);
-		assertEquals(list2.size(),10000);
+		assertEquals(10000,list2.size());
 		assertTrue(emptyList.isEmpty());
 		//Adds one to the previous empty list, to ensure that it is not empty anymore.
 		emptyList.add(1);
@@ -56,13 +56,13 @@ public class CollectionTest {
 		//Add val 100 at index 9
 		list.addAt(100, 9);
 		//Check if size has been changed +1.
-		assertEquals(list.size(), 11);
+		assertEquals(11,list.size());
 		list.addAt(101, 9);
 		//Add val 101 at index 9
 		//Check if size has been changed +1.
-		assertEquals(list.size(),12);
+		assertEquals(12,list.size());
 		//Check if previous value at index 9 has shifted right to index 10.
-		assertEquals(list.get(10),100);
+		assertEquals(100,list.get(10));
 		
 		try{
 			list.addAt(10,13);
@@ -79,10 +79,10 @@ public class CollectionTest {
 		//Remove element at index 0
 		list.remove(0);
 		//Check if size has been reduces by 1;
-		assertEquals(list.size(), 9999);
+		assertEquals(9999,list.size());
 		//Check if element that was at index 0 (0)...
 		//Now is removed and replaced with the element that was on index 1 (1).
-		assertEquals(list.get(0), 1);
+		assertEquals(1,list.get(0));
 		
 		try{
 			list.remove(10000);
@@ -98,7 +98,7 @@ public class CollectionTest {
 		ArrayIntList list = buildIntList(10000);
 		
 		for(int i = 0; i < list.size(); i++){
-			assertEquals(list.get(i), i);
+			assertEquals(i,list.get(i));
 		}
 		
 		try{
@@ -115,10 +115,10 @@ public class CollectionTest {
 		ArrayIntList list = buildIntList(10000);
 		ArrayIntStack intStack = new ArrayIntStack();
 		for(int i = 0; i < list.size(); i++){
-			assertEquals(list.indexOf(i), i);
+			assertEquals(i,list.indexOf(i));
 		}
 		//If the index doesn't exist, the method should return -1.
-		assertEquals(list.indexOf(10001),-1);
+		assertEquals(-1,list.indexOf(10001));
 	}
 	
 	@Test
@@ -126,7 +126,7 @@ public class CollectionTest {
 		ArrayIntStack lIntStack = buildIntStack(10000);
 		ArrayIntStack emptyStack = buildIntStack(0);
 		//Check if the size of the stack is the amount sent in. 
-		assertEquals(lIntStack.size() , 10000);
+		assertEquals(10000,lIntStack.size());
 		assertTrue(emptyStack.isEmpty());
 	}
 	
@@ -136,14 +136,14 @@ public class CollectionTest {
 		ArrayIntStack emptyStack = buildIntStack(0);
 		//Check if its possible to remove the top of the stack.
 		//And see if the value is returned. (in this case 9999).
-		assertEquals(liStack.pop(), 9999);
+		assertEquals(9999,liStack.pop());
 		//Ensure that the value that was popped was removed.
-		assertNotEquals(liStack.pop(), 9999);
+		assertNotEquals(9999,liStack.pop());
 		for(int val : liStack){
-			assertNotEquals(val, 9999);
+			assertNotEquals(9999, val);
 		}
 		//Check if the next value to pop is the next value in the list.
-		assertEquals(liStack.pop(), 9997);
+		assertEquals(9997, liStack.pop());
 		
 		try{
 			emptyStack.pop();
@@ -160,7 +160,7 @@ public class CollectionTest {
 		ArrayIntStack liStack = buildIntStack(100001);
 		ArrayIntStack emptyStack = buildIntStack(0);
 		//Peek should now return and not remove the top(100000)
-		assertEquals(liStack.peek(), 100000);
+		assertEquals(100000,liStack.peek());
 				
 		try{
 			emptyStack.peek();

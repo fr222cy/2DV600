@@ -22,12 +22,11 @@ public class IdentifyWordsMain {
 			System.err.println("Something went wrong");
 			e.printStackTrace();
 		}
+		
 	}
 	
 	private static String fileToWordString(String path) throws FileNotFoundException{
-		if(path == null){
-			throw new FileNotFoundException();
-		}
+		
 		Scanner scanner = new Scanner(new File(path));
 		String content = "";
 		String contentToBePrinted = "";

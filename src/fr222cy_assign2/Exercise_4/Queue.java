@@ -95,6 +95,7 @@ public class Queue<E> implements IQueue<E> {
 	
 	private class ListIterator implements Iterator<E> {
         private Node node = head;
+        private int count = 0;
         
         
         @Override

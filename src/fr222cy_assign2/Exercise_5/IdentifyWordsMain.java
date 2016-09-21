@@ -24,7 +24,7 @@ public class IdentifyWordsMain {
 		}
 		
 	}
-	
+	//NOTE: this method will remove "1960s" but the letter s will remain. 
 	private static String fileToWordString(String path) throws FileNotFoundException{
 		
 		Scanner scanner = new Scanner(new File(path));

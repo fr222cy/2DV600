@@ -1,13 +1,10 @@
 package fr222cy_assign2.Exercise_1;
 
-import javax.swing.text.TabStop;
-import javax.xml.transform.Templates;
-
-import org.omg.CORBA.PRIVATE_MEMBER;
+/*
+ * @author Filip Rydberg
+ */
 
 public class ArrayIntStack extends AbstractIntCollection implements IntStack{
-	
-	
 	
 	@Override
 	public void push(int n) {

@@ -1,3 +1,7 @@
+/**
+ * @author Filip Rydberg
+ *
+ */
 package fr222cy_assign2.Exercise_2;
 
 import java.util.ArrayList;
@@ -47,7 +51,7 @@ public abstract class Vehicle {
 	}
 	
 	protected abstract String VehicleInfo();
-
+	
 	protected List<Passenger> getPassengers(){
 		for(int i = 0; i < getNumberOfPassengers();i++){
 			_passengersInVehicle.add(new Passenger(getCostPerPassenger()));

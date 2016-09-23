@@ -1,3 +1,7 @@
+/**
+ * @author Filip Rydberg
+ *
+ */
 package fr222cy_assign2.Exercise_2;
 
 public class Lorry extends Vehicle{

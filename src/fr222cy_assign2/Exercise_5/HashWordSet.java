@@ -8,7 +8,7 @@ public class HashWordSet implements WordSet{
 	
 	@Override
 	public Iterator<Word> iterator() {
-		return new setIterator();
+		return new HashIterator();
 	}
 
 	@Override
@@ -18,7 +18,7 @@ public class HashWordSet implements WordSet{
 		Node node = buckets[pos]; // First node in list
 		
 		while (node != null) { // Search list
-			if (node.value.equals(word)){
+			if (node.value.equals(word) && node.value.hashCode() == word.hashCode()){
 				return; // Element found ==> return
 			}
 			else{
@@ -50,7 +50,7 @@ public class HashWordSet implements WordSet{
 		int pos = getBucketNumber(word);
 		Node node = buckets[pos];
 		while (node != null) { // Search list for element
-		if (node.value.equals(word))
+		if (node.value.equals(word) && node.value.hashCode() == word.hashCode())
 			return true; // Found!
 		else
 			node = node.next;
@@ -58,6 +58,16 @@ public class HashWordSet implements WordSet{
 		return false;
 	}
 
+	@Override
+	public String toString(){
+		String content = "";
+		Iterator<Word> iterator = iterator();
+		while(iterator.hasNext()){
+			content += iterator.next() +"\n";
+		}
+		return content;
+	}
+	
 	@Override
 	public int size() {
 		return size;
@@ -90,15 +100,15 @@ public class HashWordSet implements WordSet{
 		}
 	}
 	
-	private class setIterator implements Iterator<Word> {
+	private class HashIterator implements Iterator<Word> {
 		private Node node;
 		private int index = 0;
         
-        public setIterator() {
+        public HashIterator() {
         	for(int i = 0; i < buckets.length; i++){
         		if(buckets[i] != null){
         			node = buckets[i];
-        			index++;
+        			index = i;
         			break;
         		}
         	}

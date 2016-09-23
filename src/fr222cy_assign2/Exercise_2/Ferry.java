@@ -1,3 +1,7 @@
+/**
+ * @author Filip Rydberg
+ *
+ */
 package fr222cy_assign2.Exercise_2;
 
 import java.util.ArrayList;
@@ -47,7 +51,13 @@ public class Ferry implements FerryInterface{
 	public int countMoney() {
 		return _totalMoney;
 	}
-
+	/*
+	 * Embark(Vehicle)
+	 * Adds the specified vehicle to the list of vehicles.
+	 * Based on the vehicles size, increase usedSpace.
+	 * Based on the cost of the vehicle, increase totalMoney.
+	 * Embark every passenger in the vehicle.
+	 */
 	@Override
 	public void embark(Vehicle v) {
 		if(hasSpaceFor(v) && _passengers.size() + v.getNumberOfPassengers() <= MAX_ROOM){
@@ -95,7 +105,11 @@ public class Ferry implements FerryInterface{
 		}
 		return true;
 	}
-	
+	/*
+	 * Tostring()
+	 * NOTE: Using Math.ceil only to get a more realistic summary.
+	 * If there are 2 Bicycles and 39 cars it would summaries 40 instead of 39.4.
+	 */
 	@Override
 	public String toString(){
 		String text = "";
@@ -104,7 +118,7 @@ public class Ferry implements FerryInterface{
 		text+="-----------------\n";
 		text+="Vehicles Embarked: "+ _vehicles.size() +"\n";
 		text+="Passengers Embarked: "+ _passengers.size() +"/"+MAX_ROOM+"\n";
-		text+="Space Occupied:"+(int)Math.ceil(_usedSpace)+"/"+MAX_SPACE+ "\n";
+		text+="Space Occupied:"+(int)Math.ceil(_usedSpace)+"/"+MAX_SPACE+ "\n"; 
 		text+="Total Income: "+ _totalMoney +"\n";
 		text+="-----------------\n";
 		text+="Vehicle Details\n";

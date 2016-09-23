@@ -1,7 +1,5 @@
 package fr222cy_assign2.Exercise_5;
 
-import java.lang.reflect.WildcardType;
-
 public class Word implements Comparable<Word> {
 	private String word;
 
@@ -30,7 +28,7 @@ public class Word implements Comparable<Word> {
 			}
 			return false ;
 	}
-	/* Implement Comparable */
+
 	public int compareTo(Word w) {
 		return word.compareToIgnoreCase(w.word);
 	}

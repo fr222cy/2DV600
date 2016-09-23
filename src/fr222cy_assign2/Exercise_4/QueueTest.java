@@ -1,10 +1,10 @@
+/**
+ * @author Filip Rydberg
+ */
 package fr222cy_assign2.Exercise_4;
-
-
 
 import static org.junit.Assert.*;
 import org.junit.*;
-
 
 public class QueueTest {
 	
@@ -23,39 +23,33 @@ public class QueueTest {
 	
 	@Test
 	public void testEnqueue(){
-		//Creates a queue containing 1 000 000 elements.
-		Queue<Integer> bigQueue = build(1000000);
-		//Check that the queue has the expected size.
-		assertEquals(bigQueue.size(), 1000000);
-		//Add one more element to the queue
-		bigQueue.enqueue(1000000);
-		//Check that the size has increased by one.
-		assertEquals(bigQueue.size(), 1000001);
+		Queue<Integer> bigQueue = build(1000000); 	//Creates a queue containing 1 000 000 elements.
+		
+		assertEquals(1000000, bigQueue.size()); //Check that the queue has the expected size.
+		bigQueue.enqueue(1000000); //Add one more element to the queue
+		assertEquals(1000001,bigQueue.size()); //Check that the size has increased by one.
 	}
 	
 	@Test
 	public void testDequeue(){
-		//Creates a queue containing 1 000 000 elements.
-		Queue<Integer> bigQueue = build(1000000);
-		//Check that the queue has the expected size.
-		assertEquals(bigQueue.size(), 1000000);
-		//The first dequeue should return and remove the head element (0)
-		assertTrue(bigQueue.dequeue() == 0);
-		//Ensure that dequeued value is removed from the queue.
+		Queue<Integer> bigQueue = build(1000000);	//Creates a queue containing 1 000 000 elements.
+		assertEquals(1000000, bigQueue.size()); //Check that the queue has the expected size.
+		assertTrue(bigQueue.dequeue() == 0); //The first dequeue should return and remove the head element (0)
+		
 		for(Object val : bigQueue){
-			assertNotEquals(val, 0);
+			assertNotEquals(0, val); //Ensure that dequeued value is removed from the queue.
 			
 		}
-		//Dequeue all elements in the queue.
+		
 		for(int i = 1; i < 1000000; i++){
-			assertTrue(i == bigQueue.dequeue());
+			assertTrue(i == bigQueue.dequeue()); //Dequeue all elements in the queue.
 		}
-		//Check if the queue is empty.
-		assertTrue(bigQueue.isEmpty());
-		//Try to dequeue a empty queue.
+		
+		assertTrue(bigQueue.isEmpty()); //Check if the queue is empty.
+		
 		//Should throw IndexOutOfBoundsException.
 		try{
-			bigQueue.dequeue();
+			bigQueue.dequeue(); //Try to dequeue a empty queue.
 			fail("Should throw IndexOutOfBoundsException!");
 		}catch (IndexOutOfBoundsException e) {
 			assertTrue(true);
@@ -68,12 +62,12 @@ public class QueueTest {
 		Queue<Integer> q2 = build(100000);
 		Queue<String> q3 = new Queue<>();
 		
-		assertEquals(q1.size(), 0);
-		assertEquals(q2.size(), 100000);
+		assertEquals(0, q1.size());
+		assertEquals(100000, q2.size());
 		
 		q3.enqueue("1");
 		q3.enqueue("5");
-		assertEquals(q3.size(), 2);
+		assertEquals(2, q3.size());
 	}
 	
 	@Test
@@ -95,8 +89,8 @@ public class QueueTest {
 		q1.enqueue("2nd Element in");
 		q1.enqueue("3rd Element in");
 		q1.enqueue("4th Element in");
-		//The head should be the first element sent in.
-		assertEquals(q1.first(), "1st Element in");
+		
+		assertEquals("1st Element in", q1.first()); //The head should be the first element sent in.
 		
 		try {
 			q2.first();
@@ -115,8 +109,8 @@ public class QueueTest {
 		q1.enqueue("2nd Element in");
 		q1.enqueue("3rd Element in");
 		q1.enqueue("4th Element in");
-		//The tail should be the last element sent in.
-		assertEquals(q1.last(), "4th Element in");
+		
+		assertEquals("4th Element in", q1.last()); //The tail should be the last element sent in.
 		
 		try {
 			q2.last(); 

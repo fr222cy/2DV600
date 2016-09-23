@@ -1,3 +1,7 @@
+/**
+ * @author Filip Rydberg
+ *
+ */
 package fr222cy_assign2.Exercice_3;
 
 import static org.junit.Assert.*;
@@ -19,7 +23,7 @@ import org.junit.runners.model.TestTimedOutException;
 import fr222cy_assign2.Exercise_1.ArrayIntList;
 import fr222cy_assign2.Exercise_1.ArrayIntStack;
 /*
- * Tests the all the methods in following classes:
+ * Tests all methods in following classes:
  * fr222cy_assign2.Exercise2.ArrayIntList
  * fr222cy_assign2.Exercise2.ArrayIntStack
  */
@@ -40,32 +44,30 @@ public class CollectionTest {
 	@Test
 	public void testAdd(){
 		//Builds two intLists with the specified size.
-		//Check if the list has the specified size.
 		ArrayIntList emptyList = buildIntList(0);
-		ArrayIntList list2 = buildIntList(10000);
-		assertEquals(10000,list2.size());
+		ArrayIntList list2 = buildIntList(10000); 
+		
+		assertEquals(10000,list2.size()); 	//Check if the list has the specified size.
 		assertTrue(emptyList.isEmpty());
-		//Adds one to the previous empty list, to ensure that it is not empty anymore.
-		emptyList.add(1);
+		
+		emptyList.add(1); //Adds one to the previous empty list, to ensure that it is not empty anymore.
 		assertTrue(!emptyList.isEmpty());
 	}
 	
 	@Test
 	public void testAddAt(){
 		ArrayIntList list = buildIntList(10);
-		//Add val 100 at index 9
-		list.addAt(100, 9);
-		//Check if size has been changed +1.
-		assertEquals(11,list.size());
-		list.addAt(101, 9);
-		//Add val 101 at index 9
-		//Check if size has been changed +1.
-		assertEquals(12,list.size());
-		//Check if previous value at index 9 has shifted right to index 10.
-		assertEquals(100,list.get(10));
+		
+		list.addAt(100, 9); //Add val 100 at index 9
+		assertEquals(11,list.size()); //Check if size has been changed +1.
+		
+		list.addAt(101, 9); //Add val 101 at index 9
+		assertEquals(12,list.size()); //Check if size has been changed +1.
+		
+		assertEquals(100,list.get(10)); //Check if previous value at index 9 has shifted right to index 10.
 		
 		try{
-			list.addAt(10,13);
+			list.addAt(10,13); //Add number that is out bounds.
 			fail("Should throw IndexOutOfBoundsException");
 		}
 		catch(IndexOutOfBoundsException e){
@@ -76,10 +78,11 @@ public class CollectionTest {
 	@Test
 	public void testRemove(){
 		ArrayIntList list = buildIntList(10000);
-		//Remove element at index 0
-		list.remove(0);
-		//Check if size has been reduces by 1;
-		assertEquals(9999,list.size());
+		
+		list.remove(0); //Remove element at index 0
+		
+		assertEquals(9999,list.size()); //Check if size has been reduces by 1;
+		
 		//Check if element that was at index 0 (0)...
 		//Now is removed and replaced with the element that was on index 1 (1).
 		assertEquals(1,list.get(0));
@@ -117,16 +120,16 @@ public class CollectionTest {
 		for(int i = 0; i < list.size(); i++){
 			assertEquals(i,list.indexOf(i));
 		}
-		//If the index doesn't exist, the method should return -1.
-		assertEquals(-1,list.indexOf(10001));
+		
+		assertEquals(-1,list.indexOf(10001)); //If the index doesn't exist, the method should return -1.
 	}
 	
 	@Test
 	public void testPush(){
 		ArrayIntStack lIntStack = buildIntStack(10000);
 		ArrayIntStack emptyStack = buildIntStack(0);
-		//Check if the size of the stack is the amount sent in. 
-		assertEquals(10000,lIntStack.size());
+		
+		assertEquals(10000,lIntStack.size()); //Check if the size of the stack is the amount sent in. 
 		assertTrue(emptyStack.isEmpty());
 	}
 	
@@ -134,16 +137,16 @@ public class CollectionTest {
 	public void testPop(){
 		ArrayIntStack liStack = buildIntStack(10000);
 		ArrayIntStack emptyStack = buildIntStack(0);
-		//Check if its possible to remove the top of the stack.
+		//Check if it's possible to remove the top of the stack.
 		//And see if the value is returned. (in this case 9999).
 		assertEquals(9999,liStack.pop());
-		//Ensure that the value that was popped was removed.
-		assertNotEquals(9999,liStack.pop());
+	
+		assertNotEquals(9999,liStack.pop()); //Ensure that the value that was popped was removed.
 		for(int val : liStack){
 			assertNotEquals(9999, val);
 		}
-		//Check if the next value to pop is the next value in the list.
-		assertEquals(9997, liStack.pop());
+		
+		assertEquals(9997, liStack.pop()); //Check if the next value to pop is the next value in the list.
 		
 		try{
 			emptyStack.pop();
@@ -156,11 +159,11 @@ public class CollectionTest {
 	
 	@Test
 	public void testPeek(){
-		//Adds a large stack with an size of 100001
-		ArrayIntStack liStack = buildIntStack(100001);
+		
+		ArrayIntStack liStack = buildIntStack(100001); //Adds a large stack with an size of 100001
 		ArrayIntStack emptyStack = buildIntStack(0);
-		//Peek should now return and not remove the top(100000)
-		assertEquals(100000,liStack.peek());
+		
+		assertEquals(100000,liStack.peek()); //Peek should now return and not remove the top(100000)
 				
 		try{
 			emptyStack.peek();

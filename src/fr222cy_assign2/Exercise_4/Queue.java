@@ -1,3 +1,6 @@
+/**
+ * @author Filip Rydberg
+ */
 package fr222cy_assign2.Exercise_4;
 
 import java.util.Iterator;
@@ -97,13 +100,11 @@ public class Queue<E> implements IQueue<E> {
         private Node node = head;
         private int count = 0;
         
-        
         @Override
         public boolean hasNext() {
             return node != null;
         }
         
-       
         @Override
         public E next() {
         	

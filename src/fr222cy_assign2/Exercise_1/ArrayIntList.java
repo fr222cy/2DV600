@@ -1,7 +1,7 @@
 package fr222cy_assign2.Exercise_1;
-
-
-
+/*
+ * @author Filip Rydberg
+ */
 public class ArrayIntList extends AbstractIntCollection implements IntList{
 
 	@Override
@@ -16,7 +16,7 @@ public class ArrayIntList extends AbstractIntCollection implements IntList{
 
 	@Override
 	public void addAt(int n, int index) throws IndexOutOfBoundsException {
-		if(!checkIndex(index, size())){
+		if(!checkIndex(index, size())){ //Don't really see the point using this. But it was a part of the abstract class.
 			throw new IndexOutOfBoundsException();
 		}
 		
@@ -24,7 +24,7 @@ public class ArrayIntList extends AbstractIntCollection implements IntList{
 		int numberToBeShifted = values[index]; 
 		values[index] = n;
 		
-		for(int i = index; i < size(); i++){//{0,1,2,3,4,5,6,7}
+		for(int i = index; i < size(); i++){
 			
 			if(size() > index){
 				resize();

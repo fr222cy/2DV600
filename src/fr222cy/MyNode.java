@@ -3,9 +3,9 @@
  */
 package fr222cy;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.TreeSet;
 
 import fr222cy_assign3.graphs.Node;
 
@@ -14,13 +14,11 @@ import fr222cy_assign3.graphs.Node;
  */
 public class MyNode<E> extends Node<E>{
 
-	private Set<Node<E>> preds = new TreeSet<Node<E>>();
-	private Set<Node<E>> succs = new TreeSet<Node<E>>();
+	private Set<Node<E>> preds = new HashSet<Node<E>>();
+	private Set<Node<E>> succs = new HashSet<Node<E>>();
 	
 	protected MyNode(E item) {
 		super(item);
-		
-		
 	}
 
 	@Override
@@ -35,8 +33,7 @@ public class MyNode<E> extends Node<E>{
 
 	@Override
 	public Iterator<Node<E>> succsOf() {
-		// TODO Auto-generated method stub
-		return null;
+		return succs.iterator();
 	}
 
 	@Override
@@ -51,8 +48,7 @@ public class MyNode<E> extends Node<E>{
 
 	@Override
 	public Iterator<Node<E>> predsOf() {
-		// TODO Auto-generated method stub
-		return null;
+		return preds.iterator();
 	}
 
 	@Override
@@ -72,14 +68,13 @@ public class MyNode<E> extends Node<E>{
 
 	@Override
 	protected void removePred(Node<E> pred) {
-		preds.remove(pred);
-		
+		preds.remove(pred);	
 	}
 
 	@Override
 	protected void disconnect() {
-		// TODO Auto-generated method stub
-		
+		preds.clear();
+		succs.clear();		
 	}
 	
 

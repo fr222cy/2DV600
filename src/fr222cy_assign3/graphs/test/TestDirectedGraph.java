@@ -28,6 +28,7 @@ public class TestDirectedGraph  {
 	
 	// Run test as a standard Java application
 	public static void main(String[] args) {
+		
 		JUnitCore junit = new JUnitCore();
 		junit.addListener(new TextListener(System.out)); 
 		junit.run(TestDirectedGraph.class);
@@ -40,6 +41,7 @@ public class TestDirectedGraph  {
 	@Before
 	public void setUp() {
 		System.out.println("Test: "+this.getClass().getName());
+		
 	}
 	
 	/* Is executed after every test method (not test case).*/
@@ -52,6 +54,7 @@ public class TestDirectedGraph  {
 
 	@Test
 	public void testCreateAdd() {
+		
 		DirectedGraph<Integer> g = generator.createEmptyGraph();		
 		Integer[] i = generator.getUsedItems();
 		
@@ -111,9 +114,10 @@ public class TestDirectedGraph  {
 		assertFalse(g.containsNodeFor(i[5]));
 		assertFalse(g.containsNodeFor(i[6]));
 		assertFalse(g.containsEdgeFor(i[6],i[5]));
-		
+	
 		/* Consistency tests */
 		DirectedGraph<Integer> dg = generator.getSmallCyclic();
+		
 		check_graph(dg);
 		
 		dg = generator.getComplete(10);

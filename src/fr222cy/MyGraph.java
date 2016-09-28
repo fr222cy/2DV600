@@ -3,17 +3,15 @@
  */
 package fr222cy;
 
-import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
-import javax.management.RuntimeErrorException;
 
 import fr222cy_assign3.graphs.DirectedGraph;
 import fr222cy_assign3.graphs.Node;
@@ -23,12 +21,16 @@ import fr222cy_assign3.graphs.Node;
  *
  */
 public class MyGraph<E> implements DirectedGraph<E> {
-	private Map<E,MyNode<E>> graph = new HashMap<E, MyNode<E>>();
-	private Set<Node<E>> heads = new TreeSet<Node<E>>();
-	private Set<Node<E>> tails = new TreeSet<Node<E>>();
+	private Map<E,MyNode<E>> graph;
+	private Set<Node<E>> heads;
+	private Set<Node<E>> tails;
+	
 
 	public MyGraph() {
-		
+		graph  = new HashMap<E, MyNode<E>>();
+		heads = new HashSet<Node<E>>();
+		tails = new HashSet<Node<E>>();
+	
 	}
 	
 	@Override
@@ -40,7 +42,7 @@ public class MyGraph<E> implements DirectedGraph<E> {
 				tails.add(newNode);
 				heads.add(newNode);
 				
-				return graph.put(item, newNode);
+				graph.put(item, newNode);
 			}
 			return graph.get(item);
 		}
@@ -52,10 +54,13 @@ public class MyGraph<E> implements DirectedGraph<E> {
 	@Override
 	public Node<E> getNodeFor(E item) {
 		if(item != null){
-			return graph.get(item);
+			if(graph.containsKey(item)){
+				return graph.get(item);
+			}
+			throw new RuntimeException("No node was found");
 		}
 		else{
-			throw new NullPointerException(item + " could not be found.");
+			throw new RuntimeException("Recieved null as input");
 		}
 	}
 
@@ -77,79 +82,129 @@ public class MyGraph<E> implements DirectedGraph<E> {
 			
 			tails.remove(src);
 			heads.remove(tgt);
-			return true;
 		}
+		return true;
 	}
 
 	@Override
 	public boolean containsNodeFor(E item) {
+		if(item == null){
+			throw new RuntimeException("Recieved null as input");
+		}
 		return graph.get(item) != null;
 	}
 
 	@Override
 	public int nodeCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return graph.size();
 	}
 
 	@Override
 	public Iterator<Node<E>> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		//Creates a new temporary hashmap with the node values.
+		HashMap<E, Node<E>>temp  = new HashMap<E, Node<E>>();
+		for(MyNode<E> node : graph.values()){
+			 temp.put(node.item(), (Node<E>)node);
+		}
+		return temp.values().iterator();
 	}
-
+	
 	@Override
 	public Iterator<Node<E>> heads() {
-		// TODO Auto-generated method stub
-		return null;
+		return heads.iterator();
 	}
 
 	@Override
 	public int headCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return heads.size();
 	}
 
 	@Override
 	public Iterator<Node<E>> tails() {
-		// TODO Auto-generated method stub
-		return null;
+		return tails.iterator();
 	}
 
 	@Override
 	public int tailCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return tails.size();
 	}
 
+	
 	@Override
 	public List<E> allItems() {
-		// TODO Auto-generated method stub
-		return null;
+		List<E> list = new ArrayList<>();
+		
+		for(MyNode<E> node : graph.values()){
+			list.add(node.item());
+		}
+		return list;
 	}
 
 	@Override
 	public int edgeCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		int edges = 0;
+		
+		for(MyNode<E> node : graph.values()){
+			
+				edges+=node.outDegree();
+			
+		}
+		return edges;
 	}
 
 	@Override
 	public void removeNodeFor(E item) {
-		// TODO Auto-generated method stub
-		
+		if(item == null || graph.get(item) == null){
+			throw new RuntimeException("Recieved null as input");
+		}
+		//TODO: Something with head or tail.
+		MyNode<E> nodeToBeRemoved = graph.get(item);
+		if(nodeToBeRemoved.isHead()){
+			heads.remove(nodeToBeRemoved);
+		}
+		if(nodeToBeRemoved.isTail()){
+			tails.remove(nodeToBeRemoved);
+		}
+		for(MyNode<E> node : graph.values()){
+			if(node.hasPred(nodeToBeRemoved)){
+				node.removePred(nodeToBeRemoved);
+			}
+			if(node.hasSucc(nodeToBeRemoved)){
+				node.removeSucc(nodeToBeRemoved);
+			}
+		}
+		nodeToBeRemoved.disconnect();
+		graph.remove(item);			
 	}
 
 	@Override
 	public boolean containsEdgeFor(E from, E to) {
-		// TODO Auto-generated method stub
+		if(from == null || to == null){
+			throw new RuntimeException("Recieved null as input");
+		}
+		if(containsNodeFor(from) && containsNodeFor(to)){
+			return graph.get(from).hasSucc(graph.get(to));
+		}
 		return false;
 	}
 
 	@Override
 	public boolean removeEdgeFor(E from, E to) {
-		// TODO Auto-generated method stub
+		if(from == null || to == null){
+			throw new RuntimeException("Recieved null as input");
+		}
+		
+		if(containsEdgeFor(from, to)){
+			graph.get(from).removeSucc(graph.get(to));
+			graph.get(to).removePred(graph.get(from));
+			
+			return true;
+		}
 		return false;
+	}
+	@Override
+	public String toString(){
+		return graph.toString();
 	}
 
 }

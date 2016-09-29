@@ -15,6 +15,7 @@ import java.util.TreeSet;
 
 import fr222cy_assign3.graphs.DirectedGraph;
 import fr222cy_assign3.graphs.Node;
+import fr222cy_assign3.graphs.test.GraphGenerator;
 
 /**
  * @author Filip Rydberg
@@ -116,7 +117,7 @@ public class MyGraph<E> implements DirectedGraph<E> {
 
 	@Override
 	public int headCount() {
-		return heads.size();
+		return  heads.size();
 	}
 
 	@Override
@@ -145,9 +146,7 @@ public class MyGraph<E> implements DirectedGraph<E> {
 		int edges = 0;
 		
 		for(MyNode<E> node : graph.values()){
-			
-				edges+=node.outDegree();
-			
+			edges+=node.outDegree();
 		}
 		return edges;
 	}
@@ -157,20 +156,29 @@ public class MyGraph<E> implements DirectedGraph<E> {
 		if(item == null || graph.get(item) == null){
 			throw new RuntimeException("Recieved null as input");
 		}
-		//TODO: Something with head or tail.
+		
 		MyNode<E> nodeToBeRemoved = graph.get(item);
 		if(nodeToBeRemoved.isHead()){
-			heads.remove(nodeToBeRemoved);
+			System.out.println("Removed Head:"+heads.remove(nodeToBeRemoved));
 		}
 		if(nodeToBeRemoved.isTail()){
-			tails.remove(nodeToBeRemoved);
+			System.out.println("Removed Tail:" + tails.remove(nodeToBeRemoved));
 		}
+		
 		for(MyNode<E> node : graph.values()){
 			if(node.hasPred(nodeToBeRemoved)){
 				node.removePred(nodeToBeRemoved);
+				
+				if(node.isHead()){
+					heads.add(node);
+				}	
 			}
 			if(node.hasSucc(nodeToBeRemoved)){
 				node.removeSucc(nodeToBeRemoved);
+				
+				if(node.isTail()){
+					tails.add(node);	
+				}
 			}
 		}
 		nodeToBeRemoved.disconnect();
@@ -195,9 +203,25 @@ public class MyGraph<E> implements DirectedGraph<E> {
 		}
 		
 		if(containsEdgeFor(from, to)){
-			graph.get(from).removeSucc(graph.get(to));
-			graph.get(to).removePred(graph.get(from));
+			MyNode<E> from1 = graph.get(from);
+			MyNode<E> to1 = graph.get(to);
+			from1.removeSucc(to1);
+			to1.removePred(from1);
 			
+			if(from1.isTail()){
+				tails.add(from1);
+			}
+			if(from1.isHead()){
+				heads.add(from1);
+			}
+			if(to1.isTail()){
+				tails.add(to1);
+			}
+			if(to1.isHead()){
+				heads.add(to1);
+			}
+			
+		
 			return true;
 		}
 		return false;

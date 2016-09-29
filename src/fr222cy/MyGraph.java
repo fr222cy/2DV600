@@ -228,7 +228,34 @@ public class MyGraph<E> implements DirectedGraph<E> {
 	}
 	@Override
 	public String toString(){
-		return graph.toString();
+		String content = "";
+		content+= "GRAPH CONTENT\n\n";
+		content+= "NODES\n";
+		content+="-------\n";
+		for(MyNode<E> node : graph.values()){
+			content+=  node + "\n";	
+			content+= "---\n";	
+		}
+		content+= "EDGES\n";
+		content+="-------\n";
+		for(MyNode<E> node : graph.values()){
+			Iterator<Node<E>> iterator = node.predsOf();
+			content+= "["+node+"]"+"Predecessors :";	
+			while(iterator.hasNext()){
+				content+= "["+iterator.next()+"]";
+			}
+			content+="\n";
+			
+			Iterator<Node<E>> iterator2 = node.succsOf();
+			content+= "["+node+"]"+"Successors :";	
+			while(iterator2.hasNext()){
+				content+= "["+iterator2.next()+"]";
+			}
+			content+="\n";
+			
+			content+= "---\n";	
+		}
+		return content;
 	}
 
 }

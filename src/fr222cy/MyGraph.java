@@ -102,12 +102,7 @@ public class MyGraph<E> implements DirectedGraph<E> {
 
 	@Override
 	public Iterator<Node<E>> iterator() {
-		//Creates a new temporary hashmap with the node values.
-		HashMap<E, Node<E>>temp  = new HashMap<E, Node<E>>();
-		for(MyNode<E> node : graph.values()){
-			 temp.put(node.item(), (Node<E>)node);
-		}
-		return temp.values().iterator();
+		return new ArrayList<Node<E>>(graph.values()).iterator();
 	}
 	
 	@Override
@@ -203,22 +198,22 @@ public class MyGraph<E> implements DirectedGraph<E> {
 		}
 		
 		if(containsEdgeFor(from, to)){
-			MyNode<E> from1 = graph.get(from);
-			MyNode<E> to1 = graph.get(to);
-			from1.removeSucc(to1);
-			to1.removePred(from1);
+			MyNode<E> nodeFrom = graph.get(from);
+			MyNode<E> nodeTo = graph.get(to);
+			nodeFrom.removeSucc(nodeTo);
+			nodeTo.removePred(nodeFrom);
 			
-			if(from1.isTail()){
-				tails.add(from1);
+			if(nodeFrom.isTail()){
+				tails.add(nodeFrom);
 			}
-			if(from1.isHead()){
-				heads.add(from1);
+			if(nodeFrom.isHead()){
+				heads.add(nodeFrom);
 			}
-			if(to1.isTail()){
-				tails.add(to1);
+			if(nodeTo.isTail()){
+				tails.add(nodeTo);
 			}
-			if(to1.isHead()){
-				heads.add(to1);
+			if(nodeTo.isHead()){
+				heads.add(nodeTo);
 			}
 			
 		

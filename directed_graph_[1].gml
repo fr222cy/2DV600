@@ -3,37 +3,37 @@ graph
 	node
 	[
 		id	 0
-		label	"0"
+		label	"a"
 	]
 	node
 	[
 		id	 1
-		label	"1"
+		label	"b"
 	]
 	node
 	[
 		id	 2
-		label	"2"
+		label	"c"
 	]
 	node
 	[
 		id	 3
-		label	"3"
+		label	"d"
 	]
 	node
 	[
 		id	 4
-		label	"4"
+		label	"e"
 	]
 	node
 	[
 		id	 5
-		label	"5"
+		label	"f"
 	]
 	node
 	[
 		id	 6
-		label	"6"
+		label	"g"
 	]
 	edge
 	[
@@ -53,22 +53,17 @@ graph
 	edge
 	[
 		source 2 
-		target 2
-	]
-	edge
-	[
-		source 2 
 		target 3
 	]
 	edge
 	[
 		source 3 
-		target 4
+		target 1
 	]
 	edge
 	[
 		source 3 
-		target 1
+		target 4
 	]
 	edge
 	[

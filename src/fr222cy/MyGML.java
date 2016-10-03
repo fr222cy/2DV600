@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import javax.imageio.spi.IIOServiceProvider;
-
 import fr222cy_assign3.graphs.DirectedGraph;
 import fr222cy_assign3.graphs.GML;
 import fr222cy_assign3.graphs.Node;
@@ -24,13 +22,12 @@ public class MyGML<E> extends GML<E>{
 		super(dg);
 		
 	}
-	Map<Node<E>,Integer> map = new HashMap<>();
+	Map<Node<E>,Integer> map = new HashMap<>(); //Using map to store the identifier and node.
 	@Override
 	public String toGML() {
 		String gml = "";
 		int identifier = 0;
 		
-	
 		gml+="graph\n[";
 		
 		for(E item : graph.allItems()){
@@ -38,7 +35,7 @@ public class MyGML<E> extends GML<E>{
 			gml+= "\n\tnode\n\t[\n";
 			gml+= "\t\tid\t " + identifier + "\n";
 			gml+= "\t\tlabel\t" + '"'+node+'"'+"\n\t]";	
-			map.put(node, identifier);
+			map.put(node, identifier);//Store the identifier as the value and the node as a key.
 			identifier++;
 		}
 		identifier = 0;
@@ -48,10 +45,8 @@ public class MyGML<E> extends GML<E>{
 			Iterator<Node<E>> successors = node.succsOf();
 			
 			while(successors.hasNext()){
-				
 				gml+= "\n\tedge\n\t[\n";
-				gml+= "\t\tsource " + identifier + " \n\t\ttarget " + map.get(successors.next()) + "\n\t]";
-			
+				gml+= "\t\tsource " + identifier + " \n\t\ttarget " + map.get(successors.next()) + "\n\t]";//map.get -> the identifier of the next node.
 			}			
 			identifier++;
 		}

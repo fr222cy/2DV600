@@ -116,7 +116,6 @@ public class MyDFS<E> implements DFS<E>{
 				}
 			}
 		}
-		
 		return false;
 	}
 

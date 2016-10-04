@@ -154,10 +154,10 @@ public class MyGraph<E> implements DirectedGraph<E> {
 		
 		MyNode<E> nodeToBeRemoved = graph.get(item);
 		if(nodeToBeRemoved.isHead()){
-			System.out.println("Removed Head:"+heads.remove(nodeToBeRemoved));
+			heads.remove(nodeToBeRemoved);
 		}
 		if(nodeToBeRemoved.isTail()){
-			System.out.println("Removed Tail:" + tails.remove(nodeToBeRemoved));
+			tails.remove(nodeToBeRemoved);
 		}
 		
 		for(MyNode<E> node : graph.values()){

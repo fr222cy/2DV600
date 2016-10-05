@@ -6,6 +6,7 @@ package fr222cy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,24 +22,26 @@ import fr222cy_assign3.graphs.test.GraphGenerator;
  *
  */
 public class MyDFS<E> implements DFS<E>{
-
+	//TODO: REPLACE LIST WITH HASHLIST 
 	@Override
 	public List<Node<E>> dfs(DirectedGraph<E> graph, Node<E> root) {
 		List<Node<E>> nodeList = new ArrayList<Node<E>>();
-		 root = graph.getNodeFor(root.item());
 
-		return dfs(nodeList, root);
+		root = graph.getNodeFor(root.item());
+
+		return dfsRecursive(nodeList, root);
 	}
 	
-	private List<Node<E>> dfs(List<Node<E>> nodeList, Node<E> node){
+	private List<Node<E>> dfsRecursive(List<Node<E>> nodeList, Node<E> node){
 		Iterator<Node<E>> successors = node.succsOf();
+	
 		node.num = nodeList.size();
 		nodeList.add(node);
 		
 		while(successors.hasNext()){
 			Node<E> next = successors.next();
 			if(!nodeList.contains(next)){
-				dfs(nodeList,next);
+				dfsRecursive(nodeList,next);
 			}
 		}
 		return nodeList;
@@ -47,11 +50,14 @@ public class MyDFS<E> implements DFS<E>{
 	@Override
 	public List<Node<E>> dfs(DirectedGraph<E> graph) {
 		List<Node<E>> nodeList = new ArrayList<Node<E>>();
-		
 		Iterator<Node<E>> heads = graph.heads();
-		
-		while(heads.hasNext()){
-			nodeList = dfs(nodeList,heads.next());
+		if(graph.headCount() != 0){
+			while(heads.hasNext()){
+				nodeList = dfsRecursive(nodeList, heads.next());
+			}
+		}
+		else{
+			nodeList = dfsRecursive(nodeList, graph.getNodeFor(graph.allItems().get(0)));
 		}
 		return nodeList;
 	}
@@ -59,22 +65,21 @@ public class MyDFS<E> implements DFS<E>{
 	@Override
 	public List<Node<E>> postOrder(DirectedGraph<E> g, Node<E> root) {
 		ArrayList<Node<E>> poList = new ArrayList<>();
-		ArrayList<Node<E>> visitedNodes = new ArrayList<>();
+		HashSet<Node<E>> visited = new HashSet<Node<E>> ();
 		root = g.getNodeFor(root.item());
-		return postOrder(poList,visitedNodes, root);
+		return postOrderRecursive(poList,visited, root);
 	}
 	
-	private List<Node<E>> postOrder(List<Node<E>> poList, List<Node<E>> vistedNodes, Node<E> node){
+	private List<Node<E>> postOrderRecursive(List<Node<E>> poList, HashSet<Node<E>> visited, Node<E> node){
 		
-		if(!vistedNodes.contains(node)){
+		if(!visited.contains(node)){
 			Iterator<Node<E>> successors = node.succsOf();
-			vistedNodes.add(node);
+			visited.add(node);
 			while(successors.hasNext()){
 				Node<E> next = successors.next();
 				if(!poList.contains(next)){
-					postOrder(poList,vistedNodes,next);
-				}
-				
+					postOrderRecursive(poList,visited,next);
+				}	
 			}
 			node.num = poList.size() + 1; 
 			poList.add(node);
@@ -86,13 +91,17 @@ public class MyDFS<E> implements DFS<E>{
 	@Override
 	public List<Node<E>> postOrder(DirectedGraph<E> g) {
 		List<Node<E>> poList = new ArrayList<>();
-		ArrayList<Node<E>> visitedNodes = new ArrayList<>();
+		HashSet<Node<E>> visited = new HashSet<Node<E>> ();
 		Iterator<Node<E>> heads = g.heads();
 		
-		while(heads.hasNext()){
-			poList = postOrder(poList, visitedNodes, heads.next());
+		if(g.headCount() != 0){
+			while(heads.hasNext()){
+				poList = postOrderRecursive(poList, visited, heads.next());
+			}
 		}
-		
+		else{
+			poList = postOrderRecursive(poList, visited, g.getNodeFor(g.allItems().get(0)));
+		}
 		return poList;
 	}
 

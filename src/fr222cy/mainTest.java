@@ -22,7 +22,7 @@ public class mainTest {
 		MyDFS<String> dfs = new MyDFS<>();
 		//MyBFS<String> bfs = new MyBFS<>();
 		//System.out.println(dfs.dfs(graph, graph.getNodeFor("a")));
-		System.out.println(dfs.dfs(graph));
+		System.out.println(dfs.dfs(graph, graph.getNodeFor("d")));
 		System.out.println(dfs.postOrder(graph));
 		System.out.println(dfs.topSort(graph));
 	}

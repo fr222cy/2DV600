@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.imageio.ImageTypeSpecifier;
 
 import fr222cy_assign3.graphs.BFS;
 import fr222cy_assign3.graphs.DirectedGraph;
@@ -23,13 +22,14 @@ public class MyBFS<E> implements BFS<E>{
 	@Override
 	public List<Node<E>> bfs(DirectedGraph<E> graph, Node<E> root) {
 		HashSet<Node<E>>  set = new HashSet<>();
+		HashSet<Node<E>>  visited = new HashSet<>();
 		List<Node<E>> list = new ArrayList<Node<E>>();
 		set.add(root);
 		
-		return bfs(set, list);
+		return bfsRecursive(set, list, visited);
 	}
 	
-	private List<Node<E>> bfs(HashSet<Node<E>>set, List<Node<E>> list){
+	private List<Node<E>> bfsRecursive(HashSet<Node<E>>set, List<Node<E>> list, HashSet<Node<E>> visited){
 			
 			Iterator<Node<E>> setIterator = set.iterator();
 			set = new HashSet<>();
@@ -37,21 +37,22 @@ public class MyBFS<E> implements BFS<E>{
 			while(setIterator.hasNext()){
 				Node<E> node = setIterator.next();
 				
-				if(!list.contains(node)){
+				if(!visited.contains(node)){
 					node.num = list.size() + 1;
+					visited.add(node);
 					list.add(node);
 				}
 				Iterator<Node<E>> successorIt = node.succsOf();			
 				while(successorIt.hasNext()){
 					Node<E> successor = successorIt.next();
-					if(!list.contains(successor)){
+					if(!visited.contains(successor)){
 						set.add(successor);
 					}
 				}		
 			}
 	
 		if(!set.isEmpty()){
-			bfs(set, list);
+			bfsRecursive(set, list,visited);
 		}
 		return list;
 	}
@@ -60,13 +61,22 @@ public class MyBFS<E> implements BFS<E>{
 	public List<Node<E>> bfs(DirectedGraph<E> graph) {
 		List<Node<E>> list = new ArrayList<Node<E>>();
 		HashSet<Node<E>>  set;
+		HashSet<Node<E>>  visited = new HashSet<>();
 		Iterator<Node<E>> heads = graph.heads();
-
-		while(heads.hasNext()){
-			set = new HashSet<>();
-			set.add(heads.next());
-			list = bfs(set,list);
+		
+		if(graph.headCount() != 0){
+			while(heads.hasNext()){
+				set = new HashSet<>();
+				set.add(heads.next());
+				list = bfsRecursive(set, list,visited);
+			}
 		}
+		else{
+			set = new HashSet<>();
+			set.add(graph.getNodeFor(graph.allItems().get(0)));
+			list = bfsRecursive(set, list,visited);
+		}
+
 		return list;
 	}
 

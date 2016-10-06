@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.omg.CosNaming.NamingContextExtPackage.AddressHelper;
 
@@ -22,26 +23,27 @@ import fr222cy_assign3.graphs.test.GraphGenerator;
  *
  */
 public class MyDFS<E> implements DFS<E>{
-	//TODO: REPLACE LIST WITH HASHLIST 
+
 	@Override
 	public List<Node<E>> dfs(DirectedGraph<E> graph, Node<E> root) {
 		List<Node<E>> nodeList = new ArrayList<Node<E>>();
-
+		HashSet<Node<E>> visited = new HashSet<>();
 		root = graph.getNodeFor(root.item());
 
-		return dfsRecursive(nodeList, root);
+		return dfsRecursive(nodeList, root, visited);
 	}
 	
-	private List<Node<E>> dfsRecursive(List<Node<E>> nodeList, Node<E> node){
+	private List<Node<E>> dfsRecursive(List<Node<E>> nodeList, Node<E> node, HashSet<Node<E>> visited){
 		Iterator<Node<E>> successors = node.succsOf();
 	
 		node.num = nodeList.size();
+		visited.add(node);
 		nodeList.add(node);
 		
 		while(successors.hasNext()){
 			Node<E> next = successors.next();
-			if(!nodeList.contains(next)){
-				dfsRecursive(nodeList,next);
+			if(!visited.contains(next)){
+				dfsRecursive(nodeList,next, visited);
 			}
 		}
 		return nodeList;
@@ -50,14 +52,15 @@ public class MyDFS<E> implements DFS<E>{
 	@Override
 	public List<Node<E>> dfs(DirectedGraph<E> graph) {
 		List<Node<E>> nodeList = new ArrayList<Node<E>>();
+		HashSet<Node<E>> visited = new HashSet<>();
 		Iterator<Node<E>> heads = graph.heads();
 		if(graph.headCount() != 0){
 			while(heads.hasNext()){
-				nodeList = dfsRecursive(nodeList, heads.next());
+				nodeList = dfsRecursive(nodeList, heads.next(), visited);
 			}
 		}
 		else{
-			nodeList = dfsRecursive(nodeList, graph.getNodeFor(graph.allItems().get(0)));
+			nodeList = dfsRecursive(nodeList, graph.getNodeFor(graph.allItems().get(0)), visited);
 		}
 		return nodeList;
 	}

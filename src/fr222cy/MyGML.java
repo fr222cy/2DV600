@@ -1,5 +1,5 @@
 /**
- * 
+ * @author Filip Rydberg
  */
 package fr222cy;
 
@@ -12,10 +12,7 @@ import fr222cy_assign3.graphs.DirectedGraph;
 import fr222cy_assign3.graphs.GML;
 import fr222cy_assign3.graphs.Node;
 
-/**
- * @author Filip Rydberg
- *
- */
+
 public class MyGML<E> extends GML<E>{
 
 	public MyGML(DirectedGraph<E> dg) {

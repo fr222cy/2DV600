@@ -33,7 +33,15 @@ public class MyGraph<E> implements DirectedGraph<E> {
 		tails = new HashSet<Node<E>>();
 	
 	}
-	
+	/*
+	 * Method: addNodeFor
+	 * Returns Node<E>
+	 * If the map does not contain the item->
+	 * Creates a new MyNode-object.
+	 * Set the object as tail and head.
+	 * Add the object to the map(item as key, node as value).
+	 * Returns the node.
+	 */
 	@Override
 	public Node<E> addNodeFor(E item) {
 		if(item != null){
@@ -145,7 +153,17 @@ public class MyGraph<E> implements DirectedGraph<E> {
 		}
 		return edges;
 	}
-
+	
+	/*
+	 * Method: removeNodeFor
+	 * Void
+	 * Retrieves the node from the item sent in.
+	 * Removes the node from heads or tails if that is the case.
+	 * Cycle through each node and see if that node has the nodeToBeRemoved as pred or succs.
+	 * If that is the case remove it and mark the node as head or tail depending on the situation.
+	 * Then disconnect the node from all other nodes.
+	 * Returns true if there was a match -> otherwise false.
+	 */
 	@Override
 	public void removeNodeFor(E item) {
 		if(item == null || graph.get(item) == null){
@@ -190,7 +208,15 @@ public class MyGraph<E> implements DirectedGraph<E> {
 		}
 		return false;
 	}
-
+	/*
+	 * Method: removeEdgeFor
+	 * Return: Boolean
+	 * Retrieves the node from the item sent in.
+	 * If there is an edge between from and to -> retrieves the nodes.
+	 * Remove the Successor from the "FROM" node.
+	 * Remove the Predecessor from the "TO" node.
+	 * If the nodes now are head or tail in the graph -> add it to the lists.
+	 */
 	@Override
 	public boolean removeEdgeFor(E from, E to) {
 		if(from == null || to == null){
@@ -215,8 +241,6 @@ public class MyGraph<E> implements DirectedGraph<E> {
 			if(nodeTo.isHead()){
 				heads.add(nodeTo);
 			}
-			
-		
 			return true;
 		}
 		return false;

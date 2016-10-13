@@ -28,7 +28,14 @@ public class MyBFS<E> implements BFS<E>{
 		
 		return bfsRecursive(set, list, visited);
 	}
-	
+	/*
+	 * Method: bfsRecursive
+	 * Returns: List<Node<E>>
+	 * Iterates each node in the set sent in(first time it is only the root node).
+	 * If the node from the set isn't visited it is added to the list.
+	 * The successors of the particular node is added to a new set and sent in to bfsRecursive again.
+	 * The method returns a list when there the next set is empty -> No more nodes.
+	 */
 	private List<Node<E>> bfsRecursive(HashSet<Node<E>>set, List<Node<E>> list, HashSet<Node<E>> visited){
 			
 			Iterator<Node<E>> setIterator = set.iterator();
@@ -76,7 +83,7 @@ public class MyBFS<E> implements BFS<E>{
 			set.add(graph.getNodeFor(graph.allItems().get(0)));
 			list = bfsRecursive(set, list,visited);
 		}
-
+		
 		return list;
 	}
 

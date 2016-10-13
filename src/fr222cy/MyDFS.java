@@ -33,6 +33,15 @@ public class MyDFS<E> implements DFS<E>{
 		return dfsRecursive(nodeList, root, visited);
 	}
 	
+	/*
+	 *  Method : dfsRecursive
+	 *  Returns: List<Node<E>>
+	 *  Retrieves the successors from the node sent in.
+	 *  Mark the node as visited.
+	 *  Loop through the successors and call the method again till there are no more successors left and returns the list.
+	 *  
+	 */
+	
 	private List<Node<E>> dfsRecursive(List<Node<E>> nodeList, Node<E> node, HashSet<Node<E>> visited){
 		Iterator<Node<E>> successors = node.succsOf();
 	
@@ -51,7 +60,7 @@ public class MyDFS<E> implements DFS<E>{
 		
 	@Override
 	public List<Node<E>> dfs(DirectedGraph<E> graph) {
-		List<Node<E>> nodeList = new ArrayList<Node<E>>();
+		List<Node<E>> nodeList = new ArrayList<Node<E>>(); 
 		HashSet<Node<E>> visited = new HashSet<>();
 		Iterator<Node<E>> heads = graph.heads();
 		if(graph.headCount() != 0){
@@ -72,6 +81,7 @@ public class MyDFS<E> implements DFS<E>{
 		root = g.getNodeFor(root.item());
 		return postOrderRecursive(poList,visited, root);
 	}
+	
 	
 	private List<Node<E>> postOrderRecursive(List<Node<E>> poList, HashSet<Node<E>> visited, Node<E> node){
 		
@@ -113,7 +123,12 @@ public class MyDFS<E> implements DFS<E>{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	/*
+	 *  Method : isCyclic
+	 *  Returns: Boolean
+	 *  If a node in the graph has a cycle with another node or itself this method return -> true, otherwise -> false
+	 */
 	@Override
 	public boolean isCyclic(DirectedGraph<E> graph) {
 		
@@ -130,7 +145,15 @@ public class MyDFS<E> implements DFS<E>{
 		}
 		return false;
 	}
-
+	
+	/*
+	 *  Method : topSort
+	 *  Returns: List<Node<E>>
+	 *  Creates an array with the size equal to containing nodes in the graph.
+	 *  Cycle through each node in the list from postOrder(with the specified graph as param) and fill it from the end.
+	 *  Convert the array to an arraylist and returns it.
+	*/
+	
 	@Override
 	public List<Node<E>> topSort(DirectedGraph<E> graph) {
 		if(isCyclic(graph)){

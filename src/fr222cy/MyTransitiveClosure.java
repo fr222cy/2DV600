@@ -20,10 +20,15 @@ import fr222cy_assign3.graphs.TransitiveClosure;
  *
  */
 public class MyTransitiveClosure<E> implements TransitiveClosure<E>{
-
+	/*
+	 * Method: computeClosure
+	 * Returns: Map<Node<E>, Collection<Node<E>>> 
+	 * Iterates each node in the graph.
+	 * Does a DFS on each node and adds the result to a HashMap with the node as key and list as value.
+	 */
 	@Override
 	public Map<Node<E>, Collection<Node<E>>> computeClosure(DirectedGraph<E> dg) {
-		Map<Node<E>, Collection<Node<E>>> map = new HashMap<>();
+		Map<Node<E>, Collection<Node<E>>> map = new HashMap<>(); 
 		Iterator<Node<E>> iterator = dg.iterator();
 		MyDFS<E> dfs = new MyDFS<E>();
 		while(iterator.hasNext()){

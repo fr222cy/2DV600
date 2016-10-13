@@ -1,0 +1,88 @@
+Depth-First Search
+------------------
+Time Complexity = O(N+S) 
+	
+METHOD{
+	add element
+	set visited
+	
+	WHILE(successors.hasNext()){ ---> O(S) Loop
+		
+		IF-STATEMENT(!VISITED){ ---> O(1) HashSet
+			dfsRecursive(nodeList,next, visited); ---> O(N) Recursive 
+		}
+	}
+}
+This method iterates over the headNodes(Not shown in code example), nodes(N) and successors(S).
+In a worst case scenario it will iterate over all heads if every node are heads.(2N+S)
+Since the collection "visited" is a Hashset, when contains is called i consider it to be an O(1).
+
+
+Breadth-First Search
+--------------------
+Time Complexity = O(2N+S) --> O(N+S)
+
+WHILE(setIterator.hasNext()){ --->O(N) Loop
+		get element
+		set visited
+		get Successors
+		
+	WHILE(successorIt.hasNext()){ --->O(S) Loop in Loop
+		add element
+	}
+}		
+
+IF-STATEMENT(!ISEMPTY){ ---> O(1) HashSet
+	bfsRecursive(set, list,visited); --->O(N) Recursive
+}
+
+BFS iterates over a hashset that contains the edge nodes from the previous nodes.
+For each node that is iterated it iterates over the children and adds it to the potentially upcoming recursion. 
+Since the collection "visited" is a Hashset, when contains is called i consider it to be an O(1).
+
+
+
+Transitive Closure
+------------------
+Time Complexity = O(N^2+NS) 
+
+WHILE(iterator.hasNext()){ ---> O(N) Loop
+	get node
+	list = dfs.dfs(dg, node); --->O(N+S)
+	add node and list to map. ---> O(1) Insert
+}
+
+A Depth-First Search is made for each node node in the graph, since the dfs has the time complexity O(N+S) ->
+The time complexity of the transitive closure should be O(N(N+S)) since dfs is called for each node. 
+
+Connected Components
+--------------------
+Time Complexity = O(N^2 + NS + N^4)
+
+
+WHILE(nodeIterator.hasNext())){ ---> O(N) Loop
+	collection = dfs(next) ---> O(N+S) Depth-first search
+	
+	FOREACH(node in collection){ ---> O(N) Nested Loop
+	
+		FOREACH(collection in allCollection){ O(N) --->Nestedx2 Loop
+		
+			IFSTATEMENT(CONNECTION){
+				Set.AddAll() ---> (N)
+				Set.AddAll() ---> (N)
+			}
+		}
+	} 
+}
+
+IFSTATEMENT(!CONNECTION){
+	Set.AddAll() ---> (N)
+	Set.AddAll() ---> (N)
+}
+
+Since the first while-loop has 2 nested loops and a Depth-fist Search the time complexity should be O(N(N+S + N(N)).
+Since the ifstatement can only happen one time in an iteration i add
+2N to the time complexity and not 4N -> O(N(N+S + N(N(2N))).
+
+If the time complexity is simplified it would look like this:
+O(N(N+S + N(N(2N))) ---> N(N+S + N^2*N) ---> O(N^2 + NS + (N * N^3)) --> (N^2 + NS + N^4)
